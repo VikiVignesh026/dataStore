@@ -4,7 +4,7 @@ This is an node server which allows a registered user to Create, View and Delete
 
 The following routes is used for data operations
 
-# Registration:
+# Registration
 localhost:3000/authentication/register (Post request)
 
 # Login
