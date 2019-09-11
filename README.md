@@ -19,6 +19,7 @@ localhost:3000/dataEntry/view (Get request)
 # Delete
 localhost:3000/dataEntry/delete (Delete request)
 
-# This uses mongodb as a data store.
+# Usage
 
+This uses mongodb as a data store.
 On successful login user token will be generated and sent as a response. All other data operations like Insert, View and Delete rquired the user token to be passed in header. The token will expire once in 10 Minutes. So, the user has to login again. 
