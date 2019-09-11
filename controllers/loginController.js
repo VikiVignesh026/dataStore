@@ -1,4 +1,6 @@
 var loginSchema = require('../models/login');
+var tokenSchema = require('../models/token');
+const uuidv4 = require('uuid/v4');
 
 module.exports = {
     registration: function(req, res, next){
@@ -57,11 +59,30 @@ module.exports = {
 
             if(user){
                 if (user.password.indexOf(password) != -1){
-                    res.status(200).json({
-                        success: 'User authenticated successfully',
-                        token: ""
+                    var generatedToken = new Buffer(uuidv4()).toString('base64');
+                    var tokenGeneration = {};
+                    tokenSchema.findOne({
+                        userId: userName
+                    }, function(err, foundToken){
+                        if (err){
+                            res.status(500).json({
+                                error: 'Error in finding user'
+                            });
+                            return;
+                        }
+                        if (foundToken){
+                            tokenGeneration = foundToken;
+                            tokenGeneration.token = generatedToken;
+                        }else{
+                            tokenGeneration = new tokenSchema({
+                                userId:userName,
+                                token:generatedToken
+                            });
+                        }
+                        tokenGeneration.save(function(err, token){
+                            res.status(200).json(token);
+                        });
                     });
-                    return;
                 }else{
                     res.status(403).json({
                         error: 'Password mismatch',

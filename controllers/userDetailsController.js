@@ -22,7 +22,8 @@ module.exports = {
                 return;
             } else {
                 var newUserDetails = new userDetailsSchema({
-                    userIdentityKey: userDetailsJson
+                    userId: userIdentityKey,
+                    userDetails: userDetailsJson
                 });
                 newUserDetails.save(function (err, userDetails) {
                     if (err) {
@@ -55,7 +56,7 @@ module.exports = {
             }
             if (userDetails) {
                 res.status(200).json({
-                    userIdentityKey: userDetails[userIdentityKey]
+                    userDetails
                 });
                 return;
             } else {
