@@ -1,6 +1,6 @@
 # DataStore
 
-This is an node server which allows a registered user to Create, Viwe and Delete user data.
+This is an node server which allows a registered user to Create, View and Delete user data.
 
 The following routes is used for data operations
 
